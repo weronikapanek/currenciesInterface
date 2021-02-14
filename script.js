@@ -2,7 +2,9 @@ const favList = document.querySelector(".list");
 
 const clearButton = document.querySelector(".clear");
 clearButton.addEventListener("click", () => {
-  favList.textContent = "";
+  if (window.confirm("Are u sure you want to clear the list?")) {
+    window("", favList.textContent = "");
+  }
 });
 
 const themeSwitchButton = document.querySelector(".mode");
@@ -73,4 +75,4 @@ function setupApp() {
 
 setupApp();
 
-console.log(localStorage);
+console.log(localStorage.setItem(favList, value));
