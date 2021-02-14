@@ -1,9 +1,10 @@
-const favlist = document.querySelector(".list");
-const favCurrency = document.querySelector(".ratesList")
+const favList = document.querySelector(".list");
+const favCurrency = document.querySelector(".favRatesList");
+const currencyWrapper = document.querySelector(".ratesList");
 
 const clearButton = document.querySelector(".clear");
 clearButton.addEventListener("click", () => {
-  favlist.textContent = "";
+  favList.textContent = "";
 });
 
 const themeSwitchButton = document.querySelector(".mode");
@@ -21,11 +22,24 @@ function createAddFavoriteButton(name, bid, ask) {
     const favCurrency = document.createElement("div");
     favCurrency.className = "ratesList";
     favCurrency.textContent = `${name} ${bid} ${ask}`;
-    if (favCurrency.textContent === favlist.textContent) {
-      return window.alert ('This currency has been already added')
+
+    if (!favCurrency === favList) {
+       return window.alert ('This currency has been already added')
     } else {
-    favlist.appendChild(favCurrency);
+
+    const favCurrency = document.createElement("div");
+    favCurrency.className = "favRatesList";
+    favCurrency.textContent = `${name} ${bid} ${ask}`;
+    favList.appendChild(favCurrency);
     }
+
+    const favCurrencyRemoveBtn = document.createElement("button");
+    favCurrencyRemoveBtn.textContent = "X";
+    favCurrencyRemoveBtn.className = "removeBtn"
+    favList.appendChild(favCurrencyRemoveBtn);
+    favCurrencyRemoveBtn.addEventListener("click", () => {
+      favCurrency.textContent = "";
+      })
   });
 
   return favButton;
@@ -62,3 +76,5 @@ function setupApp() {
 }
 
 setupApp();
+
+console.log(localStorage);
