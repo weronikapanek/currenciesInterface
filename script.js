@@ -1,6 +1,4 @@
 const favList = document.querySelector(".list");
-const favCurrency = document.querySelector(".favRatesList");
-const currencyWrapper = document.querySelector(".ratesList");
 
 const clearButton = document.querySelector(".clear");
 clearButton.addEventListener("click", () => {
@@ -18,28 +16,26 @@ function createAddFavoriteButton(name, bid, ask) {
   favButton.className = "favbutton";
   favButton.textContent = "⭐";
   favButton.addEventListener("click", () => {
-    
     const favCurrency = document.createElement("div");
     favCurrency.className = "ratesList";
     favCurrency.textContent = `${name} ${bid} ${ask}`;
 
-    if (!favCurrency === favList) {
-       return window.alert ('This currency has been already added')
+    if (favList.textContent.includes(favCurrency.textContent)) {
+      return window.alert("This currency has been already added");
     } else {
+      const favCurrency = document.createElement("div");
+      favCurrency.className = "favRatesList";
+      favCurrency.textContent = `${name} ${bid} ${ask}`;
+      favList.appendChild(favCurrency);
 
-    const favCurrency = document.createElement("div");
-    favCurrency.className = "favRatesList";
-    favCurrency.textContent = `${name} ${bid} ${ask}`;
-    favList.appendChild(favCurrency);
+      const favCurrencyRemoveBtn = document.createElement("button");
+      favCurrencyRemoveBtn.textContent = "X";
+      favCurrencyRemoveBtn.className = "removeBtn";
+      favCurrencyRemoveBtn.addEventListener("click", () => {
+        favCurrency.remove();
+      });
+      favCurrency.appendChild(favCurrencyRemoveBtn);
     }
-
-    const favCurrencyRemoveBtn = document.createElement("button");
-    favCurrencyRemoveBtn.textContent = "X";
-    favCurrencyRemoveBtn.className = "removeBtn"
-    favList.appendChild(favCurrencyRemoveBtn);
-    favCurrencyRemoveBtn.addEventListener("click", () => {
-      favCurrency.textContent = "";
-      })
   });
 
   return favButton;
