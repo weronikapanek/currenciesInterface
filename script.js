@@ -74,5 +74,3 @@ function setupApp() {
 }
 
 setupApp();
-
-console.log(localStorage.setItem(favList, value));
